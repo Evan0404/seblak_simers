@@ -5,8 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class kasir extends Model
+class transaksi extends Model
 {
     use HasFactory;
-    protected $fillable = ['nota', 'nama_menu', 'harga', 'jumlah', 'total', 'status'];
+    protected $fillable = ['nota', 'total'];
 }
