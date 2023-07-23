@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Waktu pembuatan: 19 Jul 2023 pada 16.29
+-- Waktu pembuatan: 23 Jul 2023 pada 22.38
 -- Versi server: 8.0.30
 -- Versi PHP: 8.1.10
 
@@ -45,14 +45,25 @@ CREATE TABLE `failed_jobs` (
 
 CREATE TABLE `kasirs` (
   `id_kasir` int NOT NULL,
-  `menu_id` int DEFAULT NULL,
-  `harga` varchar(20) DEFAULT NULL,
-  `jumlah` varchar(20) DEFAULT NULL,
-  `total` varchar(20) DEFAULT NULL,
-  `status` enum('keranjang','transaksi') CHARACTER SET utf8mb4 DEFAULT NULL,
+  `nota` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `nama_menu` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `harga` varchar(20) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `jumlah` varchar(20) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `total` varchar(20) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `status` enum('keranjang','transaksi') COLLATE utf8mb4_general_ci DEFAULT NULL,
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `kasirs`
+--
+
+INSERT INTO `kasirs` (`id_kasir`, `nota`, `nama_menu`, `harga`, `jumlah`, `total`, `status`, `created_at`, `updated_at`) VALUES
+(12, '2TRNSKS', 'Seblak', '12000', '3', '35000', 'transaksi', '2023-07-21 04:53:13', '2023-07-21 04:53:32'),
+(13, '2TRNSKS', 'Seblak', '12000', '5', '50000', 'transaksi', '2023-07-21 04:53:24', '2023-07-21 04:53:32'),
+(14, '3TRNSKS', 'Seblak', '12000', '3', '35000', 'transaksi', '2023-07-21 04:54:00', '2023-07-21 04:54:05'),
+(15, '4TRNSKS', 'Seblak', '12000', '8', '90000', 'transaksi', '2023-07-22 05:38:11', '2023-07-22 05:38:17');
 
 -- --------------------------------------------------------
 
@@ -62,11 +73,18 @@ CREATE TABLE `kasirs` (
 
 CREATE TABLE `menus` (
   `id_menu` bigint NOT NULL,
-  `nama_menu` varchar(100) DEFAULT NULL,
-  `harga_menu` varchar(40) DEFAULT NULL,
+  `nama_menu` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `harga_menu` varchar(40) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `menus`
+--
+
+INSERT INTO `menus` (`id_menu`, `nama_menu`, `harga_menu`, `created_at`, `updated_at`) VALUES
+(2, 'Seblak', '12000', '2023-07-20 06:34:04', '2023-07-20 07:22:07');
 
 -- --------------------------------------------------------
 
@@ -118,17 +136,46 @@ CREATE TABLE `password_reset_tokens` (
 -- --------------------------------------------------------
 
 --
+-- Struktur dari tabel `pemasukan_lains`
+--
+
+CREATE TABLE `pemasukan_lains` (
+  `id_pemasukan` int NOT NULL,
+  `nama_pemasukan` varchar(100) DEFAULT NULL,
+  `keterangan_pemasukan` text,
+  `pemasukan` varchar(20) DEFAULT NULL,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data untuk tabel `pemasukan_lains`
+--
+
+INSERT INTO `pemasukan_lains` (`id_pemasukan`, `nama_pemasukan`, `keterangan_pemasukan`, `pemasukan`, `created_at`, `updated_at`) VALUES
+(2, 'Urunan', 'Evan 20k\nLain lain 14k', '34000', '2023-07-22 00:43:44', '2023-07-22 00:43:44');
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `pengeluarans`
 --
 
 CREATE TABLE `pengeluarans` (
   `id_pengeluaran` int NOT NULL,
-  `nama_pengeluaran` text,
-  `keterangan_pengeluaran` text,
-  `pengeluaran` varchar(20) DEFAULT NULL,
+  `nama_pengeluaran` text COLLATE utf8mb4_general_ci,
+  `keterangan_pengeluaran` text COLLATE utf8mb4_general_ci,
+  `pengeluaran` varchar(20) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `pengeluarans`
+--
+
+INSERT INTO `pengeluarans` (`id_pengeluaran`, `nama_pengeluaran`, `keterangan_pengeluaran`, `pengeluaran`, `created_at`, `updated_at`) VALUES
+(4, 'Belanja Bulanan', 'Sosis 20k\nBakso 20k\nRempah 20k\nSawi 14k', '74000', '2023-07-22 00:35:15', '2023-07-22 00:35:15');
 
 -- --------------------------------------------------------
 
@@ -148,6 +195,29 @@ CREATE TABLE `personal_access_tokens` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `transaksis`
+--
+
+CREATE TABLE `transaksis` (
+  `id_transaksi` int NOT NULL,
+  `nota` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `total` varchar(30) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `transaksis`
+--
+
+INSERT INTO `transaksis` (`id_transaksi`, `nota`, `total`, `created_at`, `updated_at`) VALUES
+(2, '2TRNSKS', '85000', '2023-07-21 04:53:32', '2023-07-21 04:53:32'),
+(3, '3TRNSKS', '35000', '2023-07-21 04:54:05', '2023-07-21 04:54:05'),
+(4, '4TRNSKS', '90000', '2023-07-22 05:38:17', '2023-07-22 05:38:17');
 
 -- --------------------------------------------------------
 
@@ -215,6 +285,12 @@ ALTER TABLE `password_reset_tokens`
   ADD PRIMARY KEY (`email`);
 
 --
+-- Indeks untuk tabel `pemasukan_lains`
+--
+ALTER TABLE `pemasukan_lains`
+  ADD PRIMARY KEY (`id_pemasukan`);
+
+--
 -- Indeks untuk tabel `pengeluarans`
 --
 ALTER TABLE `pengeluarans`
@@ -227,6 +303,12 @@ ALTER TABLE `personal_access_tokens`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
   ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
+
+--
+-- Indeks untuk tabel `transaksis`
+--
+ALTER TABLE `transaksis`
+  ADD PRIMARY KEY (`id_transaksi`);
 
 --
 -- Indeks untuk tabel `users`
@@ -249,13 +331,13 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT untuk tabel `kasirs`
 --
 ALTER TABLE `kasirs`
-  MODIFY `id_kasir` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id_kasir` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT untuk tabel `menus`
 --
 ALTER TABLE `menus`
-  MODIFY `id_menu` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_menu` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT untuk tabel `migrations`
@@ -264,16 +346,28 @@ ALTER TABLE `migrations`
   MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
+-- AUTO_INCREMENT untuk tabel `pemasukan_lains`
+--
+ALTER TABLE `pemasukan_lains`
+  MODIFY `id_pemasukan` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT untuk tabel `pengeluarans`
 --
 ALTER TABLE `pengeluarans`
-  MODIFY `id_pengeluaran` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id_pengeluaran` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT untuk tabel `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT untuk tabel `transaksis`
+--
+ALTER TABLE `transaksis`
+  MODIFY `id_transaksi` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT untuk tabel `users`
