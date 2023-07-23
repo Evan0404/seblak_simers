@@ -12,6 +12,7 @@
         <link href="{{asset('app')}}/css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
         @livewireStyles
+        @stack('css')
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -63,6 +64,7 @@
                 </footer>
             </div>
         </div>
+        @stack('js')
         @livewireScripts
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="{{asset('app')}}/js/scripts.js"></script>

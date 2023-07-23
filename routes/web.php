@@ -20,11 +20,13 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
+// Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
 Route::group(['middleware' => 'auth'], function() {
-    Route::get('/home', App\Http\Livewire\Home::class,);
-    Route::get('/menu', App\Http\Livewire\Menuu::class,);
-    Route::get('/kasir', App\Http\Livewire\Kasirr::class,);
-    Route::get('/pembelian', App\Http\Livewire\Pembelian::class,);
+    Route::get('/', App\Http\Livewire\Home::class);
+    Route::get('/menu', App\Http\Livewire\Menuu::class);
+    Route::get('/kasir', App\Http\Livewire\Kasirr::class);
+    Route::get('/pembelian', App\Http\Livewire\Pembelian::class);
+    Route::get('/pemasukan', App\Http\Livewire\Pemasukan::class);
+    Route::get('/rekap', App\Http\Livewire\Rekap::class);
 
 });

@@ -55,6 +55,15 @@ class Pembelian extends Component
         $this->idpengeluaran = '';
     }
 
+    public function cancelupdate()
+    {
+        $this->nama = '';
+        $this->ket = '';
+        $this->jumlah = '';
+        $this->formStatus = '';
+        $this->idpengeluaran= '';
+    }
+
     function del($id) {
         pengeluaran::where('id_pengeluaran', $id)->delete();
     }
