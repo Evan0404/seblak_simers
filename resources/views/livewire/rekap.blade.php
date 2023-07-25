@@ -18,9 +18,26 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-5">
+        <div class="col-md-6">
             <div class="card shadow-lg p-3 mb-2">
                 <h4>Daftar Pembelian</h4>
+                <p class="mb-0">Cari Berdasarkan Tanggal</p>
+                <form method="post">
+                    <div class="row">
+                       <div iv class="col-4">
+                            <p class="mb-0">Dari</p>
+                            <input type="date" wire:model="daribulan" class="form-control">
+                        </div>
+                        <div iv class="col-4">
+                            <p class="mb-0">Hingga</p>
+                            <input type="date" wire:model="hinggabulan" class="form-control">
+                        </div>
+                        <div class="col-2">
+                            <br>
+                            <button class="btn btn-success"><i class="bi bi-search"></i></button>
+                        </div>
+                    </div>
+                </form>
                 <div style="max-height: 800px; overflow:scroll;" class="table-responsive">
                     <table class="table table-striped">
                         <thead>
@@ -39,12 +56,13 @@
                                     <td>{{date_format($item->created_at, 'd-M-Y')}}</td>
                                     <td>
                                         <div class="btn-group" role="group" aria-label="Basic example">
+                                            <button type="button" class="btn btn-primary" wire:click="showdetail('{{$item->nota}}')"><i class="bi bi-eye"></i></button>
                                             <a href="/rekap/{{$item ->id_transaksi}}" type="button" class="btn btn-warning"><i class="bi bi-printer"></i></a>
                                             <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#del{{$item ->id_transaksi}}"><i class="bi bi-trash3"></i></button>
                                         </div>
                                     </td>
                                 </tr>
-                                <!-- Modal -->
+                                <!-- Modal Hapus-->
                                 <div class="modal fade" id="del{{$item ->id_transaksi}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                   <div class="modal-dialog">
                                     <div class="modal-content">
@@ -67,16 +85,50 @@
                             @endforeach
                         </tbody>
                     </table>
+                    <center>
+                        {{ $transaksi->links() }}
+                    </center>
                 </div>
             </div>
         </div>
-        <div class="col-md-7">
-            <div class="card shadow-lg p-3 mb-2">
-                <h4>Rekap Margin per-Bulan</h4>
-                <div>
-                    <canvas class="w-100" id="myChart3"></canvas>
+        <div class="col-md-6">
+            @if ($nota != '')
+                <div class="card shadow-lg p-3 mb-2">
+                    <h4>Detail Nota {{$nota}}</h4>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Nota</th>
+                                    <th>Menu</th>
+                                    <th>Harga</th>
+                                    <th>Jumlah</th>
+                                    <th>SubTotal</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($kasir as $item)
+                                    <tr>
+                                        <td>{{$item -> nota}}</td>
+                                        <td>{{$item -> nama_menu}}</td>
+                                        <td>Rp {{number_format($item->harga, 0,'','.')}}</td>
+                                        <td>{{$item -> jumlah}}</td>
+                                        <td>Rp {{number_format($item->total, 0,'','.')}}</td>
+                                    </tr>
+                                @endforeach
+                                <tr>
+                                    <td colspan="4"><b>Total</b></td>
+                                    @foreach ($totalkasir as $item)
+                                        <td><b>Rp {{number_format($item -> total, 0, '', '.')}}</b></td>
+                                    @endforeach
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-            </div>
+            @else
+                
+            @endif
         </div>
     </div>
     @push('js')
@@ -127,35 +179,6 @@
                     data: [
                         @foreach($dataset2 as $value)
                             '{{$value -> total}}',
-                        @endforeach
-                    ],
-                    borderWidth: 1
-                }]
-                },
-                options: {
-                scales: {
-                    y: {
-                    beginAtZero: true
-                    }
-                }
-                }
-            });
-
-            const ctxxx = document.getElementById('myChart3');
-
-            new Chart(ctxxx, {
-                type: 'bar',
-                data: {
-                labels: [
-                    <?php foreach ($dataset2 as $label) :?>
-                        '{{$label->bulan}}',
-                    <?php endforeach;?>
-                ],
-                datasets: [{
-                    label: 'Total Pengeluaran Per Bulan',
-                    data: [
-                        @foreach($dataset2 as $value2, $dataset as $value, $dataset3 as $value3)
-                            '{{$value2 -> total}}',
                         @endforeach
                     ],
                     borderWidth: 1

@@ -4,14 +4,14 @@
     <div class="row">
         <div class="col-md-3">
             <div class="card shadow-lg mb-2">
-                <div class="card-body p-3">
+                <div class="card-body h-100 p-3">
                     <div class="row">
                         <div class="col-4">
                             <h1 class="text-success"><i class="bi bi-currency-dollar"></i></h1>
                         </div>
                         <div class="col-8">
-                            <h6>Total Margin</h6>
-                            <h4>Rp {{number_format(($totalpenjualan+$totalpemasukan)-$totalpengeluaran, 0, ',', '.')}}</h4>
+                            <p class="mb-0" style="font-size: 15px">Total Margin</p>
+                            <h5>Rp {{number_format(($totalpenjualan+$totalpemasukan)-$totalpengeluaran, 0, ',', '.')}}</h5>
                         </div>
                     </div>
                 </div>
@@ -21,14 +21,14 @@
         </div>
         <div class="col-md-3">
             <div class="card shadow-lg mb-2">
-                <div class="card-body p-3">
+                <div class="card-body h-100 p-3">
                     <div class="row">
                         <div class="col-4">
                             <h1 class="text-primary"><i class="bi bi-cart-fill"></i></h1>
                         </div>
                         <div class="col-8">
-                            <h6>Total Penjualan</h6>
-                            <h4>Rp {{number_format($totalpenjualan,0,',','.')}}</h4>
+                            <p class="mb-0" style="font-size: 15px">Total Penjualan</p>
+                            <h5>Rp {{number_format($totalpenjualan,0,',','.')}}</h5>
                         </div>
                     </div>
                 </div>
@@ -38,14 +38,14 @@
         </div>
         <div class="col-md-3">
             <div class="card shadow-lg mb-2">
-                <div class="card-body p-3">
+                <div class="card-body h-100 p-3">
                     <div class="row">
                         <div class="col-4">
                             <h1 class="text-info"><i class="bi bi-bag-check-fill"></i></h1>
                         </div>
                         <div class="col-8">
-                            <h6>Pemasukan Lain</h6>
-                            <h4>Rp {{number_format($totalpemasukan,0,',','.')}}</h4>
+                            <p class="mb-0" style="font-size: 15px">Pemasukan Lain</p>
+                            <h5>Rp {{number_format($totalpemasukan,0,',','.')}}</h5>
                         </div>
                     </div>
                 </div>
@@ -55,14 +55,14 @@
         </div>
         <div class="col-md-3">
             <div class="card shadow-lg mb-2">
-                <div class="card-body p-3">
+                <div class="card-body h-100 p-3">
                     <div class="row">
                         <div class="col-4">
                             <h1 class="text-danger"><i class="bi bi-bag-dash-fill"></i></h1>
                         </div>
                         <div class="col-8">
-                            <h6>Total Pengeluaran</h6>
-                            <h4>Rp {{number_format($totalpengeluaran,0,',','.')}}</h4>
+                            <p class="mb-0" style="font-size: 15px">Total Pengeluaran</p>
+                            <h5>Rp {{number_format($totalpengeluaran,0,',','.')}}</h5>
                         </div>
                     </div>
                 </div>
